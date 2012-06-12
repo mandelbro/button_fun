@@ -2,20 +2,44 @@
 <html>
 <head>
 	<title>Mobile Button Fun</title>
-  <link href="/css/reset.css" media="all" rel="stylesheet" type="text/css" />
-  <link href="/css/styles.css" media="all" rel="stylesheet" type="text/css" />
+
+	<!-- Apple web app meta tags -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0">
+  <link rel="apple-touch-icon" href="images/ios/touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/ios/touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="images/ios/touch-icon-iphoneretina.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/ios/touch-icon-ipadnew.png">
+  <link rel="apple-touch-startup-image" href="images/ios/startup-image.png">
+	<!-- load stylesheets -->
+  <link href="css/reset.css" media="all" rel="stylesheet" type="text/css">
+  <link href="css/font-face.css" media="all" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" media="all" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/landscape.css" type="text/css"  media="screen" id="orient-css">
   <!-- load library js -->
-  <script src="/js/lib/jquery-mobile.js" type="text/javascript"></script>
-  <script src="/js/lib/clickable.js" type="text/javascript"></script>
-  <script src="/js/lib/modernizr.js" type="text/javascript"></script>
+  <script src="js/lib/jquery.js" type="text/javascript"></script>
+  <script src="js/lib/modernizr.js" type="text/javascript"></script>
+  <script src="js/lib/blueprint.js" type="text/javascript"></script>
 	<!-- load view controller classes -->
-  <script src="/js/controllers/buttonFun.view.js" type="text/javascript"></script>
-  <!-- load init file -->
-  <script src="/js/init.js" type="text/javascript"></script>
+  <script src="js/controller/application.view.js" type="text/javascript"></script>
+  <script src="js/controller/loading.view.js" type="text/javascript"></script>
+  <script src="js/controller/widebar.view.js" type="text/javascript"></script>
+  <script src="js/controller/sidebar.view.js" type="text/javascript"></script>
+  <script src="js/controller/menu.view.js" type="text/javascript"></script>
+  <!-- init the view controller blueprint -->
+  <script type="text/javascript">
+  	$(document).ready(initBlueprint);
+  </script>
+
 </head>
 <body>
+	<div id="page" class="landscape">
 
-<h1>Fun with Buttons </h1>
+	<span id="application" class="js-init"></span>
+	<span id="widebar" class="js-init"></span>
+	<span id="loading" class="js-init"></span>
 
+	</div>
 </body>
 </html>

@@ -1,0 +1,55 @@
+@font-face {
+	font-family: 'Ostrich Sans';
+	src: url('webfonts/ostrich-regular-webfont.eot');
+	src: local('☺'), url('webfonts/ostrich-regular-webfont.woff') format('woff'), url('webfonts/ostrich-regular-webfont.ttf') format('truetype'), url('webfonts/ostrich-regular-webfont.svg#webfontIyfZbseF') format('svg');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ostrich Sans';
+	src: url('webfonts/ostrich-dashed-webfont.eot');
+	src: local('☺'), url('webfonts/ostrich-dashed-webfont.woff') format('woff'), url('webfonts/ostrich-dashed-webfont.ttf') format('truetype'), url('webfonts/ostrich-dashed-webfont.svg#webfontIyfZbseF') format('svg');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ostrich Sans';
+	src: url('webfonts/ostrich-light-webfont.eot');
+	src: local('☺'), url('webfonts/ostrich-light-webfont.woff') format('woff'), url('webfonts/ostrich-light-webfont.ttf') format('truetype'), url('webfonts/ostrich-light-webfont.svg#webfontIyfZbseF') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ostrich Sans';
+	src: url('webfonts/ostrich-rounded-webfont.eot');
+	src: local('☺'), url('webfonts/ostrich-rounded-webfont.woff') format('woff'), url('webfonts/ostrich-rounded-webfont.ttf') format('truetype'), url('webfonts/ostrich-rounded-webfont.svg#webfontIyfZbseF') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ostrich Sans';
+	src: url('webfonts/ostrich-bold-webfont.eot');
+	src: local('☺'), url('webfonts/ostrich-bold-webfont.woff') format('woff'), url('webfonts/ostrich-bold-webfont.ttf') format('truetype'), url('webfonts/ostrich-bold-webfont.svg#webfontIyfZbseF') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ostrich Sans';
+	src: url('webfonts/ostrich-black-webfont.eot');
+	src: local('☺'), url('webfonts/ostrich-black-webfont.woff') format('woff'), url('webfonts/ostrich-black-webfont.ttf') format('truetype'), url('webfonts/ostrich-black-webfont.svg#webfontIyfZbseF') format('svg');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Pictos';
+	src: url('webfonts/pictos-web.eot');
+	src: local('☺'), url('webfonts/pictos-web.woff') format('woff'), url('webfonts/pictos-web.ttf') format('truetype'), url('webfonts/pictos-web.svg#webfontIyfZbseF') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

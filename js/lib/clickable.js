@@ -1,4 +1,4 @@
-//first let's create an instance of the ClickableListener object	
+//first let's create an instance of the ClickableListener object
 var clickableListener;
 
 $(document).ready(function(event) {
@@ -11,12 +11,12 @@ $(document).ready(function(event) {
  * A class used to handle all click events in an application.
  * Use by setting up Outlet listeners, which are class names
  * placed on the applicable html elements.
- * 
+ *
  * This class should be used as a child object of your view
  * controller, it will attempt to find a class name that
  * matches one of your specified listeners, and call that
  * function directly.
- *			
+ *
  * @param callbackObject
  *		The parent object, needed since JS doesn't have a way
  *		of refering to it's parent function and we'll be
@@ -30,15 +30,15 @@ $(document).ready(function(event) {
  * 		have a delete button on the DOM which will remove a
  *		corresponding element from the DOM and perform some
  *		background tasks to manage it's deletion.
- *		
+ *
  * 		Clickable works in 3 parts, the clickable event listener
  *		which listens for the click, your view controller which
  *		houses the functionality related to the click event,
  *		and the html "target" element which fires the click event.
- *		
+ *
  *		Clickable uses a full document event listener, and bubbling
  *		to target the clicked element.
- *		
+ *
  *		So here is how it would work
  *
  *		1). In your view controller class you would create a new
@@ -46,7 +46,7 @@ $(document).ready(function(event) {
  *				names of any actions you want to register upon init.
  *				Actions will fire a callback in your view controller
  *				class when a click event occurs
- *			
+ *
  *				Application_viewController() {
  *					... (stuff before)
  *					this.clickable = new Clickable('Application_viewController', ['deleteItem'])
@@ -55,18 +55,18 @@ $(document).ready(function(event) {
  *
  *				Or you can use the Clickable.addAction(actions) method to add
  *				more actions to the clickable object as you go.
- *				
+ *
  *				Application_viewController.prototype.insertDeleteLink = function() {
- *				
+ *
  *					//add a new <a> tag to the DOM
  *					var deleteElement = $('<a href="...">Delete</a>');
  *					DOMElement.append(derpElement);
  *					//add the derp action to the clickable object
  *					this.clickable.addAction(['deleteItem']);
  *					... (more stuff)
- *				
+ *
  *				};
- *		
+ *
  *		2). Next, you'll need to add the deleteItem method to your
  *				view controller class, each clickable action accepts
  *				three arguments:
@@ -80,23 +80,23 @@ $(document).ready(function(event) {
  *						it should be called after the latest timed event to avoid
  *						actions being called concurrently which can cause issues.
  *						You can read more about the clickable queue in the init method.
- *					- event : the entire event object, only necessary for actions 
+ *					- event : the entire event object, only necessary for actions
  *						which require more information about the click event than
  *						just the html element that was clicked
- *				
+ *
  *				Application_viewController.prototype.deleteItem = function(target, next, event) {
- *					
+ *
  *					... (do stuff when the action is fired)
- *					
+ *
  *					next(); //the stuf is done, call the next action in the queue
  *				};
- *		
+ *
  *		3). Finally, You need to connect the dots by telling the html element
  *				on the DOM what action to fire when it gets clicked. For this
  *				example we'll only use one action but because we have queueing
  *				built into the class, you can use as many actions on a single
  *				element as you need.
- *				
+ *
  *				... (html structure)
  *
  *					<a class="... (other classes) clickable_deleteItem">Delete</a>
@@ -106,15 +106,15 @@ $(document).ready(function(event) {
  *				Or if you inserted the element onto the DOM programatically,
  *				you can simply add the appropriately formatted CSS class to the
  *				element.
- *				
+ *
  *				Application_viewController.prototype.insertDeleteLink = function() {
  *
  *					... (previous stuff)
  *					//add the deleteItem class to the html element
  *					derpElement.addClass('clickable_deleteItem');
- *				
+ *
  *				};
- *		
+ *
  *		4). You're done, the <a> tag knows what action to tell clickable to call when
  *				gets clicked, Clickable knows what action callback to fire when
  *				that action is reported, and your view controller knows what to do when
@@ -129,7 +129,7 @@ function Clickable(callbackObject, handlers) {
 	this.id = this.generateClickableID();
 	//create an instance of the clickableListener
 	this.listener = clickableListener.init(this.callback, this.id, this.handlers);
-	
+
 }
 
 /*
@@ -161,14 +161,14 @@ Clickable.prototype.generateClickableID = function() {
  */
 function ClickableListener() {
 	var self = this;
-	
+
 	this.callbacks = {};
-	
+
 	$('body').live('click', function(event) {
 		//call the clickabl.init method
 		self.event(event);
 	});
-	
+
 }
 
 /**
@@ -182,7 +182,7 @@ ClickableListener.prototype.init = function(callback, id, handlers) {
 		instance : callback,
 		handlers : handlers || []
 	};
-	
+
 	return this;
 };
 
@@ -194,44 +194,44 @@ ClickableListener.prototype.init = function(callback, id, handlers) {
  */
 ClickableListener.prototype.event = function(event) {
 	//declare self
-  var self = this;
-	
+	var self = this;
+
 	//create the target element
-  var target = $(event.target);
-  //if the clickable_disable class is present, kill the process
-  if(target.hasClass('clickable_disable')) {
-    event.preventDefault();
-    return;
-  }
+	var target = $(event.target);
+	//if the clickable_disable class is present, kill the process
+	if(target.hasClass('clickable_disable')) {
+		event.preventDefault();
+		return;
+	}
 	//prevent the default event from firing, use .clickable_prevent to stop this from happening
 	if(target.hasClass('clickable_prevent')) event.preventDefault();
-	
+
 	//if the element is embedded, run the embedded method
 	if(target.hasClass('clickable_embedded')) {
 		this.embedded(target, event);
 		return;
 	}
-  
-  /**
-   * The Clickable Loop
-   * Based on the principle that for a page with a high volume of event listeners there
-   * will be a smaller number of event handlers, i.e., a list of content where each listing
-   * has a handfull of elements with event listeners witch all refer to the same handlers.
-   * Instead of having an individual event listener for each element, the Clickable Loop
-   * registers every click on the page with a single event listener and loops through
-   * every possible event handler to see if the element that was clicked corresponds with
-   * a registered handler. The element tells Clickable if it corresponds with a handler
-   * by having a class with the name of a registered handler, prepended with 'clickable_'
-   * class. The idea is there will never be a huge number of handlers, but there can be
-   * a high number of elements, this allows you to have potentially thousands of elements
-   * with event handlers while using a minimal amount of resources.
-   *
-   * tl;dr this allows you to apply event handlers to a potentially infinite number of
-   * elements with minimal resource draw.
-   */ 
-  $.each(this.callbacks, function(name, callback) {
 
-    $.each(callback.handlers, function(index, handler){
+	/**
+	 * The Clickable Loop
+	 * Based on the principle that for a page with a high volume of event listeners there
+	 * will be a smaller number of event handlers, i.e., a list of content where each listing
+	 * has a handfull of elements with event listeners witch all refer to the same handlers.
+	 * Instead of having an individual event listener for each element, the Clickable Loop
+	 * registers every click on the page with a single event listener and loops through
+	 * every possible event handler to see if the element that was clicked corresponds with
+	 * a registered handler. The element tells Clickable if it corresponds with a handler
+	 * by having a class with the name of a registered handler, prepended with 'clickable_'
+	 * class. The idea is there will never be a huge number of handlers, but there can be
+	 * a high number of elements, this allows you to have potentially thousands of elements
+	 * with event handlers while using a minimal amount of resources.
+	 *
+	 * tl;dr this allows you to apply event handlers to a potentially infinite number of
+	 * elements with minimal resource draw.
+	 */
+	$.each(this.callbacks, function(name, callback) {
+
+		$.each(callback.handlers, function(index, handler){
 			if($(target).hasClass('clickable_' + handler)) {
 				/**
 				 * The "clickable" Queue
@@ -245,7 +245,7 @@ ClickableListener.prototype.event = function(event) {
 				 * @link http://api.jquery.com/queue/#queue2
 				 */
 
-			  $('body').queue("clickable", function (next) {
+				$('body').queue("clickable", function (next) {
 					event.preventDefault(); // prevent the default action
 					//add the next object to the event
 					callback.instance[handler](target, next, event);
@@ -260,19 +260,19 @@ ClickableListener.prototype.event = function(event) {
 	});
 	// begin the dequeueing process
 	$('body').dequeue('clickable');
-	
+
 };
 
 Array.prototype.unique = function() {
-  var a = this.concat();
-  for(var i=0; i<a.length; ++i) {
-      for(var j=i+1; j<a.length; ++j) {
-          if(a[i] === a[j])
-              a.splice(j, 1);
-      }
-  }
+	var a = this.concat();
+	for(var i=0; i<a.length; ++i) {
+			for(var j=i+1; j<a.length; ++j) {
+					if(a[i] === a[j])
+							a.splice(j, 1);
+			}
+	}
 
-  return a;
+	return a;
 };
 
 /*
@@ -286,13 +286,13 @@ Array.prototype.unique = function() {
  *		the callback to add the handlers to
  */
 ClickableListener.prototype.addHandler = function(handler, id) {
-  
+
 	//check the type of the handler to ensure it is an array
 	if(typeof handler == 'string') handler = [handler];
 
 	this.callbacks[id].handlers = this.callbacks[id].handlers.concat(handler).unique();
-			
-	
+
+
 };
 
 /**
@@ -304,12 +304,12 @@ ClickableListener.prototype.addHandler = function(handler, id) {
 ClickableListener.prototype.embedded = function (target, event) {
 
 	//define self
-  var self = this;
-	
+	var self = this;
+
 	//declare vars
 	var parent = target.closest('a');
-	
-  $.each(this.callbacks, function(name, callback) {
+
+	$.each(this.callbacks, function(name, callback) {
 		$.each(callback.handlers, function(index, handler){
 			if(parent.hasClass('clickable_' + handler)) {
 				/**
@@ -331,10 +331,10 @@ ClickableListener.prototype.embedded = function (target, event) {
 			}
 		});
 	});
-		
+
 	// begin the dequeueing process
 	$('body').dequeue('clickable_embedded');
-	
+
 	//don't worry about running cleanup here we want to stop the original queue
-	 
+
 };
