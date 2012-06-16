@@ -13,32 +13,28 @@
   <link rel="apple-touch-icon" sizes="144x144" href="images/ios/touch-icon-ipadnew.png">
   <link rel="apple-touch-startup-image" href="images/ios/startup-image.png">
 	<!-- load stylesheets -->
-  <link href="css/reset.css" media="all" rel="stylesheet" type="text/css">
-  <link href="css/font-face.css" media="all" rel="stylesheet" type="text/css">
-  <link href="css/styles.css" media="all" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="css/landscape.css" type="text/css"  media="screen" id="orient-css">
+  <link href="css/reset.css" media="all" rel="stylesheet" type="text/css" media="screen">
+  <link href="css/font-face.css" media="all" rel="stylesheet" type="text/css" media="screen">
+  <link href="css/styles.css" media="all" rel="stylesheet" type="text/css" media="screen">
+  <link rel="stylesheet" href="css/landscape.css" type="text/css" media="screen" id="orient-css" media="screen">
   <!-- load library js -->
   <script src="js/lib/jquery.js" type="text/javascript"></script>
-  <script src="js/lib/modernizr.js" type="text/javascript"></script>
+  <script src="js/lib/chrono.js" type="text/javascript"></script>
   <script src="js/lib/blueprint.js" type="text/javascript"></script>
 	<!-- load view controller classes -->
   <script src="js/controller/application.view.js" type="text/javascript"></script>
   <script src="js/controller/loading.view.js" type="text/javascript"></script>
   <script src="js/controller/widebar.view.js" type="text/javascript"></script>
   <script src="js/controller/sidebar.view.js" type="text/javascript"></script>
-  <script src="js/controller/menu.view.js" type="text/javascript"></script>
-  <!-- init the view controller blueprint -->
-  <script type="text/javascript">
-  	$(document).ready(initBlueprint);
-  </script>
 
 </head>
 <body>
 	<div id="page" class="landscape">
 
-	<span id="application" class="js-init"></span>
-	<span id="widebar" class="js-init"></span>
-	<span id="loading" class="js-init"></span>
+	<span id="application" class="blueprint-js"></span>
+	<div id="loading" class="blueprint-js"></div>
+	<div id="sidebar" class="blueprint-js"></div>
+	<div id="widebar" class="blueprint-js"></div>
 
 	</div>
 </body>
